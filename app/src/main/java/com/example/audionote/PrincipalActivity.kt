@@ -3,10 +3,14 @@ package com.example.audionote
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.PopupMenu
+import androidx.recyclerview.widget.RecyclerView
 import com.example.audionote.modelos.NotaDeVoz
 import com.google.android.gms.tasks.Task
 import com.google.firebase.Timestamp
@@ -24,6 +28,7 @@ class PrincipalActivity : AppCompatActivity() {
     var query: Query? = null
     val arreglo: ArrayList<NotaDeVoz> = arrayListOf()
     var uid:String?=null
+    lateinit var adaptador:FRecyclerViewAdaptadorNotaDeVoz
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_principal)
@@ -43,13 +48,17 @@ class PrincipalActivity : AppCompatActivity() {
                 irActividad(GrabadoraActivity::class.java)
             }
 
-            val listView = findViewById<ListView>(R.id.lv_notas_voz)
-            val adaptador = ArrayAdapter(
+            val recyclerView = findViewById<RecyclerView>(R.id.rv_notas_voz)
+            adaptador = FRecyclerViewAdaptadorNotaDeVoz(
                 this,
-                android.R.layout.simple_list_item_1,
-                arreglo
+                arreglo,
+                recyclerView
             )
-            listView.adapter = adaptador
+            recyclerView.adapter=adaptador
+            recyclerView.itemAnimator=androidx.recyclerview.widget
+                .DefaultItemAnimator()
+            recyclerView.layoutManager=androidx.recyclerview.widget
+                .LinearLayoutManager(this)
             adaptador.notifyDataSetChanged()
 
 
@@ -90,7 +99,7 @@ class PrincipalActivity : AppCompatActivity() {
     }
 
     fun consultarNotasDeVoz(
-        adaptador: ArrayAdapter<NotaDeVoz>
+        adaptador: FRecyclerViewAdaptadorNotaDeVoz
     ){
         val db = Firebase.firestore
         val notasRef = db.collection("nota_de_voz")
@@ -150,7 +159,16 @@ class PrincipalActivity : AppCompatActivity() {
             uid!!
         )
 
-        
+
         arreglo.add(nuevaNota)
     }
+
+
+    fun eliminar(notaDeVoz: NotaDeVoz){
+        notaDeVoz.delete()
+        arreglo.removeIf{it.id==notaDeVoz.id}
+        adaptador.notifyDataSetChanged()
+    }
+
+
 }

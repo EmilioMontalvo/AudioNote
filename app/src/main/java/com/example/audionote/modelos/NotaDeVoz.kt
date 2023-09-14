@@ -62,6 +62,15 @@ class NotaDeVoz(
             .addOnFailureListener { }
     }
 
+
+    fun getFechaActualizacionString():String {
+        val date = fechaActualizacion?.toDate()
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+        val formattedDate = dateFormat.format(date)
+
+        return formattedDate.toString();
+    }
+
     override fun toString(): String {
         val date = fechaActualizacion?.toDate()
 
