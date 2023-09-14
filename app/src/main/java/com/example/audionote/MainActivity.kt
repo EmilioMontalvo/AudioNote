@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import com.example.audionote.modelos.NotaDeVoz
 import com.example.audionote.modelos.Usuario
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,4 +27,6 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, clase)
         startActivity(intent)
     }
+
+
 }

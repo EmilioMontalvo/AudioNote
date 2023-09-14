@@ -50,7 +50,7 @@ class GrabadoraActivity : AppCompatActivity() {
         val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         archivo = File(getExternalFilesDir(null), "/grabacion_$timeStamp.3gp")
 
-        print("444444444444444444444444444444444444444444444444")
+
         print(archivo.absolutePath)
         player = MediaPlayer()
         btnGrabar.setOnClickListener {

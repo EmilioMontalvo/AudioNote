@@ -4,11 +4,12 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 class Notificacion(
     var id:String="",
     var idNotaDeVoz:String="",
-    var fechaNotificacion: LocalDate? =null
+    var fechaNotificacion: LocalDateTime? =null
 
 ) {
     private val colectionReference: CollectionReference = Firebase.firestore.collection("notificacion")
