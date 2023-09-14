@@ -1,11 +1,12 @@
-package com.example.audionote.vistas
+package com.example.audionote
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import com.example.audionote.R
+import androidx.activity.result.contract.ActivityResultContracts
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.IdpResponse
@@ -13,6 +14,12 @@ import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
+    val callback=  registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ){
+            result ->
+    }
+
     //Callback del INTENT de LOGIN
     private val respuestaLoginAuthUi = registerForActivityResult(
         FirebaseAuthUIActivityResultContract()
@@ -36,6 +43,9 @@ class LoginActivity : AppCompatActivity() {
         if(res.isNewUser == true){
             registrarUsuarioPorPrimeraVez(res)
         }
+
+        irActividad(PrincipalActivity::class.java)
+
     }
     fun registrarUsuarioPorPrimeraVez(usuario: IdpResponse){ /* usuario.email; usuario.phoneNumber; usuario.user.name;*/  }
 
@@ -67,6 +77,8 @@ class LoginActivity : AppCompatActivity() {
             btnLogout.visibility = View.VISIBLE
             btnLogin.visibility = View.INVISIBLE
             tvBienvenido.text = usuario.displayName
+            irActividad(PrincipalActivity::class.java)
+
         }
     }
     fun seDeslogeo(){
@@ -77,5 +89,12 @@ class LoginActivity : AppCompatActivity() {
         btnLogout.visibility = View.INVISIBLE
         btnLogin.visibility = View.VISIBLE
         FirebaseAuth.getInstance().signOut()
+    }
+
+    fun irActividad(
+        clase: Class<*>
+    ){
+        val intent = Intent(this, clase)
+        startActivity(intent)
     }
 }

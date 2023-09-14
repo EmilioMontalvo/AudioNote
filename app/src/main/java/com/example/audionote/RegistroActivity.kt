@@ -1,12 +1,12 @@
-package com.example.audionote.vistas
+package com.example.audionote
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.audionote.R
 
-class FormularioGrabacionActivity : AppCompatActivity() {
+class RegistroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_formulario_grabacion)
+        setContentView(R.layout.activity_registro)
     }
 }
