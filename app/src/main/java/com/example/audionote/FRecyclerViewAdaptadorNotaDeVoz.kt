@@ -44,6 +44,9 @@ class FRecyclerViewAdaptadorNotaDeVoz(
         holder.buttonMore.setOnClickListener{ view ->
             showPopupMenu(view,notaActual)
         }
+        holder.buttonPlay.setOnClickListener{
+            contexto.playAudio(notaActual.rutaArchivo)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -56,7 +59,7 @@ class FRecyclerViewAdaptadorNotaDeVoz(
         popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
             when (menuItem.itemId) {
                 R.id.mi_ver -> {
-                    contexto.irActividad(FormularioGrabacionActivity::class.java)
+                    contexto.abrirActividadConParametros(FormularioGrabacionActivity::class.java,nota)
                     true
                 }
                 R.id.mi_eliminar -> {

@@ -1,6 +1,7 @@
 package com.example.audionote
 
 import android.content.Intent
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -8,6 +9,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
@@ -21,19 +23,25 @@ import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.io.IOException
 import java.time.format.DateTimeFormatter
 
 
 class PrincipalActivity : AppCompatActivity() {
     var query: Query? = null
-    val arreglo: ArrayList<NotaDeVoz> = arrayListOf()
+    val arreglo: ArrayList<NotaDeVoz> = BDD.arreglo
     var uid:String?=null
+    lateinit var player: MediaPlayer
     lateinit var adaptador:FRecyclerViewAdaptadorNotaDeVoz
+    val callback=  registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ){
+            result ->
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_principal)
-
-
+        player = MediaPlayer()
         uid = FirebaseAuth.getInstance().currentUser?.uid
 
         if (uid!=null){
@@ -168,6 +176,31 @@ class PrincipalActivity : AppCompatActivity() {
         notaDeVoz.delete()
         arreglo.removeIf{it.id==notaDeVoz.id}
         adaptador.notifyDataSetChanged()
+    }
+
+    fun abrirActividadConParametros(
+        clase: Class<*>,
+        nota:NotaDeVoz
+    ){
+        val intentExplicito = Intent(this, clase)
+        intentExplicito.putExtra("idNota", nota.id)
+        callback.launch(intentExplicito)
+    }
+
+    fun playAudio(path:String){
+        if (player.isPlaying) {
+            player.stop()
+            player.release()
+        }
+
+        player = MediaPlayer()
+        try {
+            player.setDataSource(path)
+            player.prepare()
+            player.start()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
     }
 
 
