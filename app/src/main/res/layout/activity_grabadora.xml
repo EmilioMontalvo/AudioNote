@@ -7,73 +7,84 @@
     tools:context=".GrabadoraActivity"
     android:background="@color/fondo">
 
-    <Button
-        android:id="@+id/btn_detener_grabacion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginBottom="100dp"
-        android:text="Detener"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_grabando"
-        app:layout_constraintVertical_bias="0.927" />
-
-    <Button
-        android:id="@+id/btn_pausar_grabacion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="56dp"
-        android:layout_marginBottom="132dp"
-        android:text="Pausar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_grabando"
-        app:layout_constraintVertical_bias="0.995" />
-
     <TextView
         android:id="@+id/tv_grabando"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
-        android:text="Grabando"
+        android:layout_marginTop="240dp"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:text="Grabandora"
+        android:textColor="@color/boton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btn_iniciar_grabacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="208dp"
-        android:text="Iniciar"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="80dp"
+        android:backgroundTint="@color/fondo"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.299"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_grabando"
+        app:layout_constraintVertical_bias="0.477"
+        app:srcCompat="@drawable/iniciar_grabacion" />
 
-    <Button
+    <ImageButton
+        android:id="@+id/btn_detener_grabacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="80dp"
+        android:backgroundTint="@color/fondo"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_grabando"
+        app:layout_constraintVertical_bias="0.477"
+        app:srcCompat="@drawable/detener_grabacion" />
+
+    <ImageButton
         android:id="@+id/btn_guardar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="208dp"
-        android:text="Guardar"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="@color/fondo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.874"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_grabando"
+        app:srcCompat="@drawable/guardar" />
+
+    <ImageButton
+        android:id="@+id/btn_pausar_grabacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/fondo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.611"
-        app:layout_constraintStart_toEndOf="@+id/btn_iniciar_grabacion" />
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="@+id/tv_grabando"
+        app:layout_constraintTop_toBottomOf="@+id/btn_guardar"
+        app:layout_constraintVertical_bias="0.111"
+        app:srcCompat="@drawable/pausar_grabacion" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btn_despausar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Continuar"
+        android:backgroundTint="@color/fondo"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.861"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_pausar_grabacion"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="@+id/tv_grabando"
+        app:layout_constraintTop_toBottomOf="@+id/btn_guardar"
+        app:layout_constraintVertical_bias="0.111"
+        app:srcCompat="@drawable/resume" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

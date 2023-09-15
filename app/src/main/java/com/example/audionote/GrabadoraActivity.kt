@@ -20,12 +20,13 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Date
 import android.provider.Settings
+import android.widget.ImageButton
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 
 class GrabadoraActivity : AppCompatActivity() {
     lateinit var recorder: MediaRecorder
-    lateinit var player: MediaPlayer
+
     var isRecording = false
     var isPaused = false
     var direcionDeArchivo=""
@@ -56,14 +57,14 @@ class GrabadoraActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_grabadora)
 
-        val btnGrabar = findViewById<Button>(R.id.btn_iniciar_grabacion)
+        val btnGrabar = findViewById<ImageButton>(R.id.btn_iniciar_grabacion)
         val tv1 = findViewById<TextView>(R.id.tv_grabando)
-        val btnDetener = findViewById<Button>(R.id.btn_detener_grabacion)
-        val btnPausar = findViewById<Button>(R.id.btn_pausar_grabacion)
-        val btnContinuar = findViewById<Button>(R.id.btn_despausar)
-        val btnGuardar=findViewById<Button>(R.id.btn_guardar)
+        val btnDetener = findViewById<ImageButton>(R.id.btn_detener_grabacion)
+        val btnPausar = findViewById<ImageButton>(R.id.btn_pausar_grabacion)
+        val btnContinuar = findViewById<ImageButton>(R.id.btn_despausar)
+        val btnGuardar=findViewById<ImageButton>(R.id.btn_guardar)
 
-        player = MediaPlayer()
+
         btnPausar.isEnabled = false
         btnGuardar.isEnabled = false
 
@@ -135,21 +136,6 @@ class GrabadoraActivity : AppCompatActivity() {
                 recorder.stop()
                 recorder.release()
                 isRecording = false
-            }
-
-            if (player.isPlaying) {
-                player.stop()
-                player.release()
-            }
-
-            player = MediaPlayer()
-            try {
-                player.setDataSource(archivo.absolutePath)
-                println(archivo.absolutePath)
-                player.prepare()
-                player.start()
-            } catch (e: IOException) {
-                e.printStackTrace()
             }
 
             btnGrabar.visibility = View.VISIBLE

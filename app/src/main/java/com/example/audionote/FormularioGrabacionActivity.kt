@@ -76,6 +76,7 @@ class FormularioGrabacionActivity : AppCompatActivity() {
                             titulo!="" && descripcion!=""
 
                         ){
+
                             val nota1= NotaDeVoz(
                                 "",
                                 titulo,
@@ -105,9 +106,9 @@ class FormularioGrabacionActivity : AppCompatActivity() {
                                     }
 
                                     if (timestamp != null) {
+                                        nota1.add()
                                         val notificacion=Notificacion("",nota1.id,timestamp)
                                         abrirDialogo("Nota guardada con exito")
-                                        nota1.add()
                                         notificacion.add()
                                         irActividad(PrincipalActivity::class.java)
                                     } else {
