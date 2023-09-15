@@ -12,13 +12,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="440dp"
-        android:backgroundTint="@color/boton"
         android:text="Empezar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:textColor="@color/fondo"/>
+        android:textColor="@color/fondo"
+        android:backgroundTint="@color/boton"/>
 
     <ImageView
         android:id="@+id/imageView"

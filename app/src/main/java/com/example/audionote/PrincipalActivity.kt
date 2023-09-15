@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ListView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -46,7 +47,7 @@ class PrincipalActivity : AppCompatActivity() {
 
         if (uid!=null){
             //crearDatosPrueba()
-            val botonLogout=findViewById<Button>(R.id.btn_logout_principal)
+            val botonLogout=findViewById<ImageButton>(R.id.btn_logout_principal)
             botonLogout.setOnClickListener{
                 abrirDialogoLogOut()
             }
